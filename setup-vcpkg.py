@@ -155,7 +155,8 @@ def main():
             tmp.generate()
             sys.exit(0)
 
-        qt5dir = None if args.qt5dir == '' else args.qt5dir
+        qt5dir = None if args.qt5dir == '' else str(args.qt5dir).replace('\\', '/')
+        print(qt5dir)
         if not tmp.load(qt5dir):
             sys.exit(-1)
 
