@@ -38,15 +38,15 @@ jobs:
         path: ${{github.workspace}}/setup-vcpkg.json
         write-mode: overwrite
         contents: |
-          \{
-              \"title\": \"This is a configuration file the content of which varies with each user\",
-              \"values\": \{
-                  \"Qt5ConfigDir\": \{
-                      \"intro\": \"The absolute path of the directory where Qt5Config.cmake exists\",
-                      \"value\": \"$QT_ROOT_DIR/lib/cmake/Qt5\"
-                  \}
-              \}
-          \}
+          {
+              "title": "This is a configuration file the content of which varies with each user",
+              "values": {
+                  "Qt5ConfigDir": {
+                      "intro": "The absolute path of the directory where Qt5Config.cmake exists",
+                      "value": "$QT_ROOT_DIR/lib/cmake/Qt5"
+                  }
+              }
+          }
       
     - name: Set up vcpkg
       run: python ${{github.workspace}}/setup-vcpkg.py
