@@ -24,18 +24,21 @@ config_dict = {
 config_path = "setup-vcpkg.json"
 
 
-def load() -> bool:
-    # Check config exists
-    if not os.path.isfile(config_path):
-        print(f"Configuration file {config_path} doesn't exists, generate new one.")
-        generate()
-        return False
-
-    # Read config
-    with open(config_path, encoding='utf-8') as f:
-        root = json.load(f)
-        config_inst.Qt5ConfigDir = root.get(
-            "values").get("Qt5ConfigDir").get("value")
+def load(qt5_config_dir=None) -> bool:
+    if qt5_config_dir is None:
+        # Check config exists
+        if not os.path.isfile(config_path):
+            print(f"Configuration file {config_path} doesn't exists, generate new one.")
+            generate()
+            return False
+    
+        # Read config
+        with open(config_path, encoding='utf-8') as f:
+            root = json.load(f)
+            config_inst.Qt5ConfigDir = root.get(
+                "values").get("Qt5ConfigDir").get("value")
+    else:
+        config_inst.Qt5ConfigDir = str(qt5_config_dir)
 
     # Check Qt5Config.cmake exists
     if not os.path.isfile(f"{config_inst.Qt5ConfigDir}/Qt5Config.cmake"):
