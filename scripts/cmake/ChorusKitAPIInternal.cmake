@@ -243,29 +243,29 @@ function(_ck_configure_build_info_header _file)
     # Configure build information header
     set(_git_branch "unknown")
     set(_git_hash "unknown")
-
+    #[[
     if(Git_FOUND)
         execute_process(
             COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%H
             OUTPUT_VARIABLE _git_hash
             OUTPUT_STRIP_TRAILING_WHITESPACE
-            #ERROR_QUIET
+            ERROR_QUIET
             WORKING_DIRECTORY
             ${CK_PROJECT_ROOT_DIR}
-            #COMMAND_ERROR_IS_FATAL ANY
+            COMMAND_ERROR_IS_FATAL ANY
         )
 
         execute_process(
             COMMAND ${GIT_EXECUTABLE} symbolic-ref --short -q HEAD
             OUTPUT_VARIABLE _git_branch
             OUTPUT_STRIP_TRAILING_WHITESPACE
-            #ERROR_QUIET
+            ERROR_QUIET
             WORKING_DIRECTORY
             ${CK_PROJECT_ROOT_DIR}
-            #COMMAND_ERROR_IS_FATAL ANY
+            COMMAND_ERROR_IS_FATAL ANY
         )
     endif()
-
+    #]]
     set(_compiler_name unknown)
 
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
