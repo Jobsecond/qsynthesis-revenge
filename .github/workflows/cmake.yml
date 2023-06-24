@@ -41,24 +41,24 @@ jobs:
         setup-python: 'false'
         set-env: 'true'
       
-    - name: Generate setup-vcpkg.json
-      uses: "DamianReeves/write-file-action@master"
-      with:
-        path: ${{github.workspace}}/setup-vcpkg.json
-        write-mode: overwrite
-        contents: |
-          {
-              "title": "This is a configuration file the content of which varies with each user",
-              "values": {
-                  "Qt5ConfigDir": {
-                      "intro": "The absolute path of the directory where Qt5Config.cmake exists",
-                      "value": "${{env.Qt5_Dir}}/lib/cmake/Qt5"
-                  }
-              }
-          }
+    #- name: Generate setup-vcpkg.json
+    #  uses: "DamianReeves/write-file-action@master"
+    #  with:
+    #    path: ${{github.workspace}}/setup-vcpkg.json
+    #    write-mode: overwrite
+    #    contents: |
+    #      {
+    #          "title": "This is a configuration file the content of which varies with each user",
+    #          "values": {
+    #              "Qt5ConfigDir": {
+    #                  "intro": "The absolute path of the directory where Qt5Config.cmake exists",
+    #                  "value": "${{env.Qt5_Dir}}/lib/cmake/Qt5"
+    #              }
+    #          }
+    #      }
       
     - name: Set up vcpkg
-      run: python ${{github.workspace}}/setup-vcpkg.py
+      run: python ${{github.workspace}}/setup-vcpkg.py --qt5dir=${{env.Qt5_Dir}}/lib/cmake/Qt5
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
