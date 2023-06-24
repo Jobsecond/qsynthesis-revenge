@@ -33,7 +33,11 @@ jobs:
       uses: jurplel/install-qt-action@v3
       
     - name: Generate setup-vcpkg.json
-      run: echo '{"values":{"Qt5ConfigDir":{"value":"'$QT_ROOT_DIR'/lib/cmake/Qt5"}}}'>${{github.workspace}}/setup-vcpkg.json
+      uses: "finnp/create-file-action@master"
+      env:
+        FILE_NAME: ${{github.workspace}}/setup-vcpkg.json
+        FILE_DATA: \{\"values\":\{\"Qt5ConfigDir\":\{\"value\":\"$QT_ROOT_DIR/cmake/Qt5\"\}\}\}
+      
     - name: Set up vcpkg
       run: python ${{github.workspace}}/setup-vcpkg.py
 
