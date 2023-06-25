@@ -24,8 +24,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: ListDir
-      run: tree
+    - run: git log -1 --pretty=format:%H
+    - run: git symbolic-ref --short -q HEAD
       
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
