@@ -243,7 +243,7 @@ function(_ck_configure_build_info_header _file)
     # Configure build information header
     set(_git_branch "unknown")
     set(_git_hash "unknown")
-
+    #[[
     if(Git_FOUND)
         execute_process(
             COMMAND ${GIT_EXECUTABLE} log -1 --pretty=format:%H
@@ -265,7 +265,7 @@ function(_ck_configure_build_info_header _file)
             COMMAND_ERROR_IS_FATAL ANY
         )
     endif()
-
+    #]]
     set(_compiler_name unknown)
 
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")

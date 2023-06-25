@@ -107,6 +107,8 @@ def main():
         "--init", help="Generate configuration file.", action="store_true")
     parser.add_argument(
         "--deploy", help="Build and deploy the project.", type=str, default="", metavar="<out dir>")
+    parser.add_argument(
+        "--qt5dir", help="Qt5 Install Location", type=str, default="")
     args = parser.parse_args()
 
     # Get platform
@@ -153,7 +155,9 @@ def main():
             tmp.generate()
             sys.exit(0)
 
-        if not tmp.load():
+        qt5dir = None if args.qt5dir == '' else str(args.qt5dir).replace('\\', '/')
+        print(qt5dir)
+        if not tmp.load(qt5dir):
             sys.exit(-1)
 
     # -- Detect system proxy
